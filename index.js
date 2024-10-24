@@ -1,14 +1,12 @@
-import http from "node:http";
+import express from "express";
 
-const hostname = "0.0.0.0";
+const app = express();
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "text/plain");
-  res.end("Hello, Dunia Mzima");
+app.get("/", (req, res) => {
+  res.send("Jambo from Express.js");
 });
 
-server.listen(port, hostname, () => {
-  console.log("Server running at port:", port);
+app.listen(port, () => {
+  console.log("Server running on port:", port);
 });

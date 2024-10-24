@@ -12,5 +12,8 @@
     "name": "Francis Osore",
     "email": "francisosore8@gmail.com"
   },
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
 }
