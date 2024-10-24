@@ -1,0 +1,16 @@
+{
+  "name": "maktaba",
+  "version": "1.0.0",
+  "description": "Library Management System",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Francis Osore",
+    "email": "francisosore8@gmail.com"
+  },
+  "license": "ISC"
+}
