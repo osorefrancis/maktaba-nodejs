@@ -5,7 +5,7 @@ const port = 3000;
 
 // Displays the Dashboard
 app.get("/", (req, res) => {
-  res.status(200).send("Karibu to Maktaba");
+  res.status(200).send("Karibu to Maktaba!");
 });
 
 // Displays the books list
