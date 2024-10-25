@@ -1,48 +1,11 @@
-<h1>Edit Book</h1>
+<div class="space-y-4">
+  <h1 class="font-bold text-lg">Edit Book</h1>
 
-<form action="/books/<%= bookId %>" method="post">
-  <div>
-    <label for="title">Book Title</label>
-    <input type="text" name="title" id="title" placeholder="Book title" />
-    <span id="title-error" class="hide-error"></span>
-  </div>
-
-  <div>
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author" placeholder="Author" />
-    <span id="author-error" class="hide-error"></span>
-  </div>
-
-  <div>
-    <label for="year">Year of Publication</label>
-    <input
-      type="number"
-      name="year"
-      id="year"
-      placeholder="Year of Publication"
-      min="1900"
-      max="2024"
-    />
-    <span id="year-error" class="hide-error"></span>
-  </div>
-
-  <div>
-    <label for="description">Description</label>
-    <textarea
-      name="description"
-      id="description"
-      placeholder="Description"
-    ></textarea>
-    <span id="description-error" class="hide-error"></span>
-  </div>
-
-  <div>
-    <label for="image">Book Image</label>
-    <input type="text" name="image" id="image" placeholder="Book Image" />
-    <span id="image-error" class="hide-error"></span>
-  </div>
-
-  <div>
-    <button type="submit">Save</button>
-  </div>
-</form>
+  <form
+    action="/books/<%= bookId %>"
+    method="post"
+    class="max-w-screen-sm bg-white rounded-md shadow-md space-y-4 p-4"
+  >
+    <%- include('form') -%>
+  </form>
+</div>

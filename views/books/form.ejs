@@ -1,0 +1,61 @@
+<div class="flex flex-col space-y-1">
+  <label for="title" class="font-bold text-sm">Book Title</label>
+  <input type="text" name="title" id="title" placeholder="Book title" />
+  <span id="title-error" class="hidden text-sm text-red-600"></span>
+</div>
+
+<div class="flex flex-col space-y-1">
+  <label for="author" class="font-bold text-sm">Author</label>
+  <input type="text" name="author" id="author" placeholder="Author" />
+  <span id="author-error" class="hidden text-sm text-red-600"></span>
+</div>
+
+<div class="flex flex-col space-y-1">
+  <label for="year" class="font-bold text-sm">Year of Publication</label>
+  <input
+    type="number"
+    name="year"
+    id="year"
+    placeholder="Year of Publication"
+    min="1900"
+    max="2024"
+  />
+  <span id="year-error" class="hidden text-sm text-red-600"></span>
+</div>
+
+<div class="flex flex-col space-y-1">
+  <label for="description" class="font-bold text-sm">Description</label>
+  <textarea
+    name="description"
+    id="description"
+    placeholder="Description"
+  ></textarea>
+  <span id="description-error" class="hidden text-sm text-red-600"></span>
+</div>
+
+<div class="flex flex-col space-y-1">
+  <label for="image" class="font-bold text-sm">Book Image</label>
+  <input type="text" name="image" id="image" placeholder="Book Image" />
+  <span id="image-error" class="hidden text-sm text-red-600"></span>
+</div>
+
+<div>
+  <button
+    type="button"
+    class="bg-indigo-950 text-indigo-50 rounded px-10 py-2 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-950 hover:rounded-sm transition-all duration-300"
+    onclick="onSubmit()"
+  >
+    Save
+  </button>
+</div>
+
+<script src="/js/validator.js"></script>
+<script>
+  function onSubmit() {
+    osoreCheck(image.value, "Book Image", "#image-error");
+    osoreCheck(title.value, "Book Title", "#title-error");
+    osoreCheck(author.value, "Book Author", "#author-error");
+    osoreCheck(year.value, "Year of Publication", "#year-error");
+    osoreCheck(description.value, "Description", "#description-error");
+  }
+</script>
