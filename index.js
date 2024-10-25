@@ -1,21 +1,27 @@
 import express from "express";
+import ejsLayouts from "express-ejs-layouts";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+
+app.set("view engine", "ejs");
+app.use(ejsLayouts);
+app.set("views", "./views");
+app.use(express.static("public"));
 
 // Displays the Dashboard
 app.get("/", (req, res) => {
-  res.status(200).send("Karibu to Maktaba!");
+  res.render("dashboard", { title: "Dashboard" });
 });
 
 // Displays the books list
 app.get("/books", (req, res) => {
-  res.status(200).send("Books List");
+  res.render("books/index", { title: "Books" });
 });
 
 // Displays a form to create a book
 app.get("/books/new", (req, res) => {
-  res.status(200).send("Form to Create a Book");
+  res.render("books/new", { title: "New Book" });
 });
 
 // Handles the form submission for creating a book
@@ -25,12 +31,12 @@ app.post("/books", (req, res) => {
 
 // Displays a book's details
 app.get("/books/:id", (req, res) => {
-  res.status(200).send("Book Details for ID: " + req.params.id);
+  res.render("books/show", { title: "Book Details", bookId: req.params.id });
 });
 
 // Displays a form to edit a book
 app.get("/books/:id/edit", (req, res) => {
-  res.status(201).send("Form to update Book Details for ID: " + req.params.id);
+  res.render("books/edit", { title: "Edit Book", bookId: req.params.id });
 });
 
 // Handles the form submission for editing a book
