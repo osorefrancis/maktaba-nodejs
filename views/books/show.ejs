@@ -1,3 +1,43 @@
-<h1>Book <%= bookId %> Details</h1>
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <h1 class="font-bold text-lg"><%= book.title %></h1>
 
-<a href="/books/<%= bookId %>/edit">Edit Book</a>
+    <a
+      href="/books/<%= book.id %>/edit"
+      class="bg-indigo-950 text-indigo-50 rounded text-sm flex items-center space-x-2 px-4 py-2 hover:bg-indigo-600 transition-all duration-200"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="m16.862 4.487l1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+        />
+      </svg>
+
+      <span>Edit Book</span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-6">
+    <img
+      src="<%= book.imgUrl %>"
+      alt="book cover"
+      class="w-full aspect-[9/16] object-cover"
+    />
+
+    <div class="space-y-1 p-4 pt-2 lg:col-span-5">
+      <div class="font-bold"><%= book.title %></div>
+      <div class="text-sm"><%= book.author %></div>
+      <div class="text-xs"><%= book.published %></div>
+      <div class="text-sm"><%= book.description %></div>
+    </div>
+  </div>
+</div>

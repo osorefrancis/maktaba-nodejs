@@ -39,13 +39,21 @@
   <span id="image-error" class="hidden text-sm text-red-600"></span>
 </div>
 
-<div>
+<div class="flex items-center space-x-2">
   <button
     type="button"
     class="bg-indigo-950 text-indigo-50 rounded px-10 py-2 hover:ring-2 hover:ring-offset-2 hover:ring-indigo-950 hover:rounded-sm transition-all duration-300"
     onclick="onSubmit()"
   >
     Save
+  </button>
+
+  <button
+    type="button"
+    class="bg-red-600 text-red-50 rounded px-10 py-2 hover:ring-2 hover:ring-offset-2 hover:ring-red-600 hover:rounded-sm transition-all duration-300"
+    onclick="goBack()"
+  >
+    Cancel
   </button>
 </div>
 
@@ -57,5 +65,9 @@
     osoreCheck(author.value, "Book Author", "#author-error");
     osoreCheck(year.value, "Year of Publication", "#year-error");
     osoreCheck(description.value, "Description", "#description-error");
+  }
+
+  function goBack() {
+    window.history.go(-1);
   }
 </script>
