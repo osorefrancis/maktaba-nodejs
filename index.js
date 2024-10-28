@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
 
 // Displays the books list
 app.get("/books", (req, res) => {
+  console.log(books);
   res.render("books/index", { title: "Books", books });
 });
 
@@ -35,13 +36,17 @@ app.post("/books", (req, res) => {
 
 // Displays a book's details
 app.get("/books/:id", (req, res) => {
-  const book = books.find((item) => item.id === Number(req.params.id));
+  const book = books.find((item) => String(item.id) === req.params.id);
+  // console.log(req.params);
+  // console.log("Kitabu:", book);
+  const huyu = [];
   res.render("books/show", { title: "Book Details", book });
 });
 
 // Displays a form to edit a book
-app.get("/books/:id/edit", (req, res) => {
-  const book = books.find((item) => item.id === Number(req.params.id));
+app.get("/books/:id", (req, res) => {
+  const book = books.find((item) => item.id === req.params.id);
+  // console.log("Kitabu:", book);
   res.render("books/edit", { title: "Edit Book", book });
 });
 
@@ -52,7 +57,7 @@ app.put("/books/:id", (req, res) => {
 
 // Destroys the book given a certain id
 app.delete("/books/:id", (req, res) => {
-  res.status(200).send("Delete Book Details for ID: " + req.params.id);
+  res.status(200).send("Delete Book Details for ID: " + req.params.slug);
 });
 
 // Start the server and listen to the assigned port.
