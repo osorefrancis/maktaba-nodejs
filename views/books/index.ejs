@@ -35,14 +35,14 @@
     >
       <a href="/books/<%= book.id %>">
         <img
-          src="<%= book.imgUrl %>"
+          src="<%= book.thumbnailUrl %>"
           alt=""
-          class="w-full aspect-[9/16] object-cover"
+          class="w-full aspect-[10/13] object-cover"
         />
 
         <div class="space-y-1 p-4 pt-2">
           <div class="font-bold"><%= book.title %></div>
-          <div class="text-sm"><%= book.author %></div>
+          <div class="text-sm"><%= book.authors.toString() %></div>
           <div class="text-xs"><%= book.published %></div>
         </div>
       </a>

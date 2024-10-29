@@ -27,17 +27,39 @@
   </div>
 
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-6">
+    <% if (book.thumbnailUrl) { %>
     <img
-      src="<%= book.imgUrl %>"
+      src="<%= book.thumbnailUrl %>"
       alt="book cover"
       class="w-full aspect-[9/16] object-cover"
     />
+    <% } %>
 
-    <div class="space-y-1 p-4 pt-2 lg:col-span-5">
-      <div class="font-bold"><%= book.title %></div>
-      <div class="text-sm"><%= book.author %></div>
-      <div class="text-xs"><%= book.published %></div>
-      <div class="text-sm"><%= book.description %></div>
+    <div class="space-y-2 lg:col-span-5">
+      <% if (book.title) { %>
+      <div class="bg-white rounded p-2">
+        <h6 class="font-bold text-xs">Title</h6>
+        <%= book.title %>
+      </div>
+      <% } %> <% if (book.authors) { %>
+      <div class="bg-white text-sm rounded p-2">
+        <h6 class="font-bold text-xs">Author(s)</h6>
+        <%= book.authors.toString() %>
+      </div>
+      <% } %> <% if (book.published) { %>
+      <div class="bg-white text-xs rounded p-2"><%= book.published %></div>
+      <h6 class="font-bold text-xs">Published On</h6>
+      <% } %> <% if (book.shortDescription) { %>
+      <div class="bg-white text-sm rounded p-2">
+        <h6 class="font-bold text-xs">Short Description</h6>
+        <%= book.shortDescription %>
+      </div>
+      <% } %> <% if (book.longDescription) { %>
+      <div class="bg-white text-sm rounded p-2">
+        <h6 class="font-bold text-xs">Long Description</h6>
+        <%= book.longDescription %>
+      </div>
+      <% } %>
     </div>
   </div>
 </div>

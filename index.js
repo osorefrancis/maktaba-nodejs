@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // Displays the books list
 app.get("/books", (req, res) => {
-  console.log(books);
+  // console.log(books);
   res.render("books/index", { title: "Books", books });
 });
 
@@ -37,7 +37,7 @@ app.post("/books", (req, res) => {
 // Displays a book's details
 app.get("/books/:id", (req, res) => {
   const book = books.find((item) => String(item.id) === req.params.id);
-  // console.log(req.params);
+  // console.log("params:", req.params);
   // console.log("Kitabu:", book);
   const huyu = [];
   res.render("books/show", { title: "Book Details", book });
