@@ -26,7 +26,7 @@
     </a>
   </div>
 
-  <ul
+  <!-- <ul
     class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
   >
     <% books.forEach((book) => { %>
@@ -48,7 +48,37 @@
       </a>
     </li>
     <% }); %>
-  </ul>
+  </ul> -->
+
+  <div class="bg-white rounded-md shadow-md">
+    <table class="w-full table-auto">
+      <thead>
+        <tr class="divide-x-2 divide-white">
+          <th class="bg-indigo-950 text-white rounded-tl-md p-2">#</th>
+          <th class="bg-indigo-950 text-white p-2">Cover</th>
+          <th class="bg-indigo-950 text-white p-2">Title</th>
+          <th class="bg-indigo-950 text-white rounded-tr-md p-2">Author(s)</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <% books.forEach((book, index) => { %>
+          <tr class="divide-x-2 divide-white <%= index % 2 === 0 ? '' : 'bg-indigo-950/10' %>">
+            <td class="text-center p-2"><%= currentPage + index %>.</td>
+            <td class="px-2 py-1">
+              <img
+            src="<%= book.thumbnailUrl %>"
+            alt="book cover"
+            class="h-10 aspect-square object-cover"
+          />
+            </td>
+            <td class="px-2 py-1"><%= book.title %></td>
+            <td class="px-2 py-1"><%= book.authors.toString() %>  </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
 
   <div
     class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"

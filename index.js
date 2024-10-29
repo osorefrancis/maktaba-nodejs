@@ -20,8 +20,15 @@ app.get("/", (req, res) => {
 
 // Displays the books list
 app.get("/books", (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 12;
+  // const page = Number(req.query.page) || 1;
+  // const limit = Number(req.query.limit) || 12;
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 12;
+
+  console.log("query params:", req.query);
+  console.log("page:", page);
+  console.log("limit:", limit);
+
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
