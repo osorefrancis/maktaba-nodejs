@@ -29,7 +29,7 @@
   <ul
     class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
   >
-    <% books.forEach((book)=>{ %>
+    <% books.forEach((book) => { %>
     <li
       class="w-full bg-white border hover:scale-105 transition-all duration-300"
     >
@@ -49,4 +49,94 @@
     </li>
     <% }); %>
   </ul>
+
+  <div
+    class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+  >
+    <div class="flex flex-1 justify-between sm:hidden">
+      <a
+        href="/books?page=<%= currentPage - 1 %>"
+        class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Previous
+      </a>
+      <a
+        href="/books?page=<%= currentPage + 1 %>"
+        class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      >
+        Next
+      </a>
+    </div>
+
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+      <div>
+        <p class="text-sm text-gray-700">
+          Showing
+          <span class="font-medium"><%= firstItem %></span>
+          to
+          <span class="font-medium"><%= lastItem %></span>
+          of
+          <span class="font-medium"><%= totalItems %></span>
+          books
+        </p>
+      </div>
+
+      <div>
+        <nav
+          class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+          aria-label="Pagination"
+        >
+          <% if (currentPage > 1) { %>
+            <a
+            href="/books?page=<%= currentPage - 1 %>"
+            class="relative inline-flex items-center rounded-l-md border border-gray-600 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Previous
+          </a>
+          <% } %>
+
+          <!-- <a
+            href="/books?page=1&limit=12"
+            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+          >
+            1
+          </a>
+          <a
+            href="/books?page=2&limit=12"
+            class="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+          >
+            2
+          </a> -->
+
+          <select
+            name="goto-page"
+            id="goto-page"
+            aria-label="select page"
+            onchange="navigatePage()"
+          >
+            <% for( let index = 0; index < totalPages; index++ ) { %>
+            <option value="<%= index + 1 %>" <%= currentPage === index + 1 ? 'selected' : '' %>>Page <%= index + 1 %></option>
+            <% } %>
+          </select>
+
+          <% if (currentPage < totalPages) { %>
+          <a
+            href="/books?page=<%= currentPage + 1 %>"
+            class="relative ml-3 inline-flex items-center rounded-r-md border border-gray-600 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Next
+          </a>
+          <% } %>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function navigatePage() {
+      const selectedPage = document.querySelector("#goto-page").value;
+      // console.log(selectedPage);
+      window.location.replace("/books?page=" + selectedPage);
+    }
+  </script>
 </div>

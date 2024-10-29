@@ -20,8 +20,34 @@ app.get("/", (req, res) => {
 
 // Displays the books list
 app.get("/books", (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 12;
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
+
+  // console.log("params:", req.query);
+  const paginatedBooks = books.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(books.length / limit);
+
   // console.log(books);
-  res.render("books/index", { title: "Books", books });
+  res.render("books/index", {
+    title: "Books",
+    books: paginatedBooks,
+    currentPage: page,
+    totalPages: totalPages,
+    firstItem: startIndex + 1,
+    lastItem: endIndex,
+    totalItems: books.length,
+  });
+  // res.json({
+  //   title: "Books",
+  //   books: paginatedBooks,
+  //   currentPage: page,
+  //   totalPages: totalPages,
+  //   firstItem: startIndex || 1,
+  //   lastItem: endIndex,
+  //   totalItems: books.length,
+  // });
 });
 
 // Displays a form to create a book
@@ -40,7 +66,7 @@ app.get("/books/:id", (req, res) => {
   // console.log("params:", req.params);
   // console.log("Kitabu:", book);
   const huyu = [];
-  res.render("books/show", { title: "Book Details", book });
+  res.render("books/show", { title: "Book Details", book: book });
 });
 
 // Displays a form to edit a book
