@@ -41,11 +41,13 @@
         <h6 class="font-bold text-xs">Title</h6>
         <%= book.title %>
       </div>
+
       <% } %> <% if (book.authors) { %>
       <div class="bg-white text-sm rounded p-2">
         <h6 class="font-bold text-xs">Author(s)</h6>
         <%= book.authors.toString() %>
       </div>
+
       <% } %> <% if (book.published) { %>
       <div class="bg-white text-xs rounded p-2"><%= book.published %></div>
       <h6 class="font-bold text-xs">Published On</h6>
@@ -54,11 +56,13 @@
         <h6 class="font-bold text-xs">Short Description</h6>
         <%= book.shortDescription %>
       </div>
+
       <% } %> <% if (book.longDescription) { %>
       <div class="bg-white text-sm rounded p-2">
         <h6 class="font-bold text-xs">Long Description</h6>
         <%= book.longDescription %>
       </div>
+
       <% } %>
     </div>
   </div>
