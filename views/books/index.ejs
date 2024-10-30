@@ -1,15 +1,10 @@
 <div class="space-y-4">
   <div class="flex items-center justify-between">
-    <h1 class="font-bold text-lg">Books</h1>
+    <h1 class="font-bold text-lg">
+      Books
+      <span class="font-extralight text-xs">(<%= totalItems %> book<%= totalItems !== 1 ? 's' : '' %>)</span>
+    </h1>
 
-<header class="">
-  <div class="container ">
-      <div class="buttons">
-          <button class="btn bg-slate-600 rounded" id="gridBtn"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm0 5h18M10 3v18"/></svg></button>
-          <button class="btn bg-slate-600 rounded" id="listBtn"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M8 8H4V4h4zm6-4h-4v4h4zm6 0h-4v4h4zM8 10H4v4h4zm6 0h-4v4h4zm6 0h-4v4h4zM8 16H4v4h4zm6 0h-4v4h4zm6 0h-4v4h4z"/></svg></button>
-      </div>
-  </div>
-</header>
       <!-- <div class="btn-group align-middle flex float-right bg-cyan-900 ">
         <div>
           <a href="/books/table"> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm0 5h18M10 3v18"/></svg></a>
@@ -20,11 +15,33 @@
         </div>
       </div> -->
 
-    <a
+    <div class="inline-flex items-center space-x-2">
+        <form action="/books" method="get">
+          <label for="search" class="relative ">
+            <input type="search" name="search" id="search" placeholder="Search..." value="<%= search %>" class="h-8 rounded-md inline-flex items-center pl-8 pr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="absolute top-1 left-2 opacity-50" width="16" height="16" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06zM10.5 7a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0" clip-rule="evenodd"/></svg>
+          </label>
+        </form>
+
+      <div class="inline-flex items-center divide-x">
+        <button type="button" class="h-8 bg-white rounded-l inline-flex items-center justify-center p-2" aria-label="table display" onclick="toggleDisplay('table')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zm0 5h18M10 3v18"/>
+          </svg>
+          <span class="sr-only">Table Display</span>
+        </button>
+
+        <button type="button" class="h-8 bg-white rounded-r inline-flex items-center justify-center p-2" aria-label="grid display" onclick="toggleDisplay('grid')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M8 8H4V4h4zm6-4h-4v4h4zm6 0h-4v4h4zM8 10H4v4h4zm6 0h-4v4h4zm6 0h-4v4h4zM8 16H4v4h4zm6 0h-4v4h4zm6 0h-4v4h4z"/>
+          </svg>
+          <span class="sr-only">Grid Display</span>
+        </button>
+      </div>
+
+      <a
       href="/books/new"
-      class="bg-indigo-950 text-indigo-50 rounded text-sm flex items-center space-x-2 px-4 py-2 hover:bg-indigo-600 transition-all duration-200">
-      
-      
+      class="h-8 bg-indigo-950 text-indigo-50 rounded text-sm flex items-center space-x-2 px-4 hover:bg-indigo-600 transition-all duration-200">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="18"
@@ -42,9 +59,10 @@
       </svg>
       <span>New Book</span>
     </a>
+    </div>
   </div>
 
-  <!-- <ul
+  <ul id="grid-display"
     class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
   >
     <% books.forEach((book) => { %>
@@ -66,9 +84,9 @@
       </a>
     </li>
     <% }); %>
-  </ul> -->
+  </ul>
 
-  <div class="bg-white rounded-md shadow-md">
+  <div id="table-display" class="hidden bg-white rounded-md shadow-md">
     <table class="w-full table-auto">
       <thead>
         <tr class="divide-x-2 divide-white">
@@ -123,10 +141,10 @@
           Showing
           <span class="font-medium"><%= firstItem %></span>
           to
-          <span class="font-medium"><%= lastItem %></span>
+          <span class="font-medium"><%= lastItem < totalItems ? lastItem : totalItems %></span>
           of
           <span class="font-medium"><%= totalItems %></span>
-          books
+          book<%= totalItems !== 1 ? 's' : '' %>
         </p>
       </div>
 
@@ -135,9 +153,9 @@
           class="isolate inline-flex -space-x-px rounded-md shadow-sm"
           aria-label="Pagination"
         >
-          <% if (currentPage > 1) { %>
+          <% if (Number(currentPage) > 1) { %>
             <a
-            href="/books?page=<%= currentPage - 1 %>"
+            href="/books?page=<%= Number(currentPage) - 1 %>"
             class="relative inline-flex items-center rounded-l-md border border-gray-600 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Previous
@@ -163,14 +181,14 @@
             aria-label="select page"
             onchange="navigatePage()"
           >
-            <% for( let index = 0; index < totalPages; index++ ) { %>
-            <option value="<%= index + 1 %>" <%= currentPage === index + 1 ? 'selected' : '' %>>Page <%= index + 1 %></option>
+            <% for( let index = 0; index < Number(totalPages); index++ ) { %>
+            <option value="<%= index + 1 %>" <%= Number(currentPage) === index + 1 ? 'selected' : '' %>>Page <%= index + 1 %></option>
             <% } %>
           </select>
 
-          <% if (currentPage < totalPages) { %>
+          <% if (Number(currentPage) < Number(totalPages)) { %>
           <a
-            href="/books?page=<%= currentPage + 1 %>"
+            href="/books?page=<%= Number(currentPage) + 1 %>"
             class="relative ml-3 inline-flex items-center rounded-r-md border border-gray-600 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
           >
             Next
@@ -182,6 +200,27 @@
   </div>
 
   <script>
+    const gridDisplay = document.querySelector('#grid-display');
+    const tableDisplay = document.querySelector('#table-display');
+
+    function toggleDisplay(val) {
+      if (val === 'grid') {
+        gridDisplay.classList.remove('hidden');
+        gridDisplay.classList.add('grid');
+
+        tableDisplay.classList.remove('block');
+        tableDisplay.classList.add('hidden');
+      }
+
+      if (val === 'table') {
+        gridDisplay.classList.add('hidden');
+        gridDisplay.classList.remove('grid');
+
+        tableDisplay.classList.add('block');
+        tableDisplay.classList.remove('hidden');
+      }
+    }
+
     function navigatePage() {
       const selectedPage = document.querySelector("#goto-page").value;
       // console.log(selectedPage);

@@ -24,17 +24,26 @@ app.get("/books", (req, res) => {
   // const limit = Number(req.query.limit) || 12;
   const page = req.query.page || 1;
   const limit = req.query.limit || 12;
+  const display = req.query.display || "grid";
+  const search = req.query.search?.toLowerCase() || "";
 
-  console.log("query params:", req.query);
-  console.log("page:", page);
-  console.log("limit:", limit);
+  // console.log("query params:", req.query);
+  // console.log("page:", page);
+  // console.log("limit:", limit);
+
+  const filteredBooks = books.filter(
+    (book) =>
+      book.title.toLowerCase().includes(search) ||
+      book.authors.some((author) => author.toLowerCase().includes(search))
+  );
+  // console.log("filteredBooks:", filteredBooks);
 
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
   // console.log("params:", req.query);
-  const paginatedBooks = books.slice(startIndex, endIndex);
-  const totalPages = Math.ceil(books.length / limit);
+  const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredBooks.length / limit);
 
   // console.log(books);
   res.render("books/index", {
@@ -44,7 +53,9 @@ app.get("/books", (req, res) => {
     totalPages: totalPages,
     firstItem: startIndex + 1,
     lastItem: endIndex,
-    totalItems: books.length,
+    totalItems: filteredBooks.length,
+    display: display,
+    search: search,
   });
   // res.json({
   //   title: "Books",
@@ -77,8 +88,8 @@ app.get("/books/:id", (req, res) => {
 });
 
 // Displays a form to edit a book
-app.get("/books/:id", (req, res) => {
-  const book = books.find((item) => item.id === req.params.id);
+app.get("/books/:id/edit", (req, res) => {
+  const book = books.find((item) => String(item.id) === req.params.id);
   // console.log("Kitabu:", book);
   res.render("books/edit", { title: "Edit Book", book });
 });
