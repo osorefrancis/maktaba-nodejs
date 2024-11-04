@@ -1,4 +1,123 @@
 <div class="space-y-4">
+  <nav class="w-full bg-white text-xs p-1">
+    <ul class="flex items-center space-x-1">
+      <li class="flex items-center space-x-2">
+        <a href="/" class="text-indigo-700 inline-flex items-center space-x-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-3"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+          >
+            <g fill="currentColor">
+              <path
+                d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06z"
+              />
+              <path
+                d="m12 5.432l8.159 8.159q.045.044.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198l.091-.086z"
+              />
+            </g>
+          </svg>
+
+          <span>Home</span>
+        </a>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="size-3"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m8.25 4.5l7.5 7.5l-7.5 7.5"
+          />
+        </svg>
+      </li>
+
+      <li class="flex items-center space-x-2">
+        <a
+          href="/books"
+          class="text-indigo-700 inline-flex items-center space-x-1"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-3"
+            width="16"
+            height="16"
+            viewBox="0 0 48 48"
+          >
+            <defs>
+              <mask id="ipTBookshelf0">
+                <path
+                  fill="#555"
+                  stroke="#fff"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                  d="M5 6h34s4 2 4 7s-4 7-4 7H5s4-2 4-7s-4-7-4-7m38 22H9s-4 2-4 7s4 7 4 7h34s-4-2-4-7s4-7 4-7"
+                />
+              </mask>
+            </defs>
+            <path
+              fill="currentColor"
+              d="M0 0h48v48H0z"
+              mask="url(#ipTBookshelf0)"
+            />
+          </svg>
+
+          <span>Books</span>
+        </a>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="size-3"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m8.25 4.5l7.5 7.5l-7.5 7.5"
+          />
+        </svg>
+      </li>
+
+      <li class="flex items-center space-x-2">
+        <span class="text-indigo-950/50 inline-flex items-center space-x-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-3"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+
+          <span>New Book</span>
+        </span>
+      </li>
+    </ul>
+  </nav>
+
   <h1 class="font-bold text-lg">New Book</h1>
 
   <form
@@ -6,6 +125,6 @@
     method="post"
     class="max-w-screen-sm bg-white rounded-md shadow-md space-y-4 p-4"
   >
-    <%- include('form') -%>
+    <%- include('_form') -%>
   </form>
 </div>
