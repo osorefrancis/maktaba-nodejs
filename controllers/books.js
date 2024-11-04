@@ -1,11 +1,8 @@
-import fs from "node:fs";
-
-const rawBooks = fs.readFileSync("books.json");
-const books = JSON.parse(rawBooks);
+import Book from "../models/book.js";
 
 export default {
   // Displays the books list
-  index: (req, res) => {
+  index: async (req, res) => {
     // const page = Number(req.query.page) || 1;
     // const limit = Number(req.query.limit) || 12;
     const page = req.query.page || 1;
@@ -16,6 +13,8 @@ export default {
     // console.log("query params:", req.query);
     // console.log("page:", page);
     // console.log("limit:", limit);
+
+    const books = await Book.getAllBooks();
 
     const filteredBooks = books.filter(
       (book) =>
@@ -65,17 +64,16 @@ export default {
   },
 
   // Displays a book's details
-  show: (req, res) => {
-    const book = books.find((item) => String(item.id) === req.params.id);
-    // console.log("params:", req.params);
-    // console.log("Kitabu:", book);
-    const huyu = [];
+  show: async (req, res) => {
+    const book = await Book.getById(Number(req.params.id)); // Cast req.params.id as a Number as the Book model expects the id to be an integer
+    // console.log("Book Object:", book);
     res.render("books/show", { title: "Book Details", book: book });
   },
 
   // Displays a form to edit a book
-  edit: (req, res) => {
-    const book = books.find((item) => String(item.id) === req.params.id);
+  edit: async (req, res) => {
+    // const book = books.find((item) => String(item.id) === req.params.id);
+    const book = await Book.getById(Number(req.params.id));
     // console.log("Kitabu:", book);
     res.render("books/edit", { title: "Edit Book", book });
   },
