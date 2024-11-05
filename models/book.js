@@ -1,20 +1,39 @@
-import fs from "node:fs";
-
-const rawBooks = fs.readFileSync("books.json");
-const books = JSON.parse(rawBooks);
+import prisma from "../config/prisma.js";
 
 class Book {
   static async getAllBooks() {
-    return books;
+    return prisma.book.findMany({
+      orderBy: {
+        id: "asc",
+      },
+    });
   }
 
   static async getById(bookId) {
-    const book = books.find((item) => item.id === bookId);
-    return book;
+    return prisma.book.findUnique({
+      where: {
+        id: bookId,
+      },
+    });
   }
 
-  static async createBook() {
-    // TODO: Handle book creation
+  static async createBook(data) {
+    return prisma.book.create({
+      data,
+    });
+  }
+
+  static async update(bookId, data) {
+    return prisma.book.update({
+      where: { id: bookId },
+      data,
+    });
+  }
+
+  static async delete(bookId) {
+    return prisma.book.delete({
+      where: { id: bookId },
+    });
   }
 }
 
