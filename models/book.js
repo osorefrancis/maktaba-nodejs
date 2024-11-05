@@ -1,6 +1,6 @@
 import prisma from "../config/prisma.js";
 
-class Book {
+export default class Book {
   static async getAllBooks() {
     return prisma.book.findMany({
       orderBy: {
@@ -9,7 +9,7 @@ class Book {
     });
   }
 
-  static async getById(bookId) {
+  static async getBookById(bookId) {
     return prisma.book.findUnique({
       where: {
         id: bookId,
@@ -17,9 +17,9 @@ class Book {
     });
   }
 
-  static async createBook(data) {
+  static async createBook(newBookData) {
     return prisma.book.create({
-      data,
+      newBookData,
     });
   }
 
@@ -36,5 +36,3 @@ class Book {
     });
   }
 }
-
-export default Book;

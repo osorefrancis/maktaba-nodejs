@@ -65,7 +65,7 @@ export default {
 
   // Displays a book's details
   show: async (req, res) => {
-    const book = await Book.getById(Number(req.params.id)); // Cast req.params.id as a Number as the Book model expects the id to be an integer
+    const book = await Book.getBookById(Number(req.params.id)); // Cast req.params.id as a Number as the Book model expects the id to be an integer
     // console.log("Book Object:", book);
     res.render("books/show", { title: "Book Details", book: book });
   },
@@ -73,7 +73,7 @@ export default {
   // Displays a form to edit a book
   edit: async (req, res) => {
     // const book = books.find((item) => String(item.id) === req.params.id);
-    const book = await Book.getById(Number(req.params.id));
+    const book = await Book.getBookById(Number(req.params.id));
     // console.log("Kitabu:", book);
     res.render("books/edit", { title: "Edit Book", book });
   },
