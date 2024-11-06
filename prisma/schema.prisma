@@ -13,6 +13,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model NavItem {
+  id        Int       @id @default(autoincrement())
+  title     String
+  href      String
+  icon      String
+  iconSolid String?
+  listOrder Int
+  deletedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("nav_items")
+}
+
 model User {
   id        Int       @id @default(autoincrement())
   name      String

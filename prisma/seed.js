@@ -10,6 +10,22 @@ async function main() {
   // Hash the plain text password
   const hashedPassword = await bycrypt.hash(plainTextPassword, 10);
 
+  // Seed navitems into the Database
+  async function seedNavItems() {
+    const navItems = [
+      { label: "Home", url: "/", position: 1 },
+      { label: "Books", url: "/books", position: 2 },
+    ];
+
+    // Insert nav items into the database
+    await NavItem.bulkCreate(navItems);
+
+    console.log("Navigation items seeded successfully!");
+  }
+
+  // Run the seeding function
+  seedNavItems();
+
   // Create a user with the hashed password
   const francis = await prisma.user.upsert({
     create: {
