@@ -11,20 +11,42 @@ async function main() {
   const hashedPassword = await bycrypt.hash(plainTextPassword, 10);
 
   // Seed navitems into the Database
-  async function seedNavItems() {
+  async function seedNavItem() {
     const navItems = [
-      { label: "Home", url: "/", position: 1 },
-      { label: "Books", url: "/books", position: 2 },
+      {
+        title: "Home",
+        href: "/",
+        icon: "heroicons:home",
+        iconSolid: "heroicons:home-solid",
+        listOrder: 1,
+      },
+      {
+        title: "Books",
+        href: "/books",
+        icon: "heroicons:book-open",
+        iconSolid: "heroicons:book-open-20-solid",
+        listOrder: 2,
+      },
     ];
 
     // Insert nav items into the database
-    await NavItem.bulkCreate(navItems);
+    // await NavItem.bulkCreate(navItems);
 
-    console.log("Navigation items seeded successfully!");
+    for (const navItem of navItems) {
+      await prisma.navItem.create({
+        title: navItem.title,
+        href: navItem.href,
+        icon: navItem.icon,
+        iconSolid: navItem.iconSolid,
+        listOrder: navItem.listOrder,
+      });
+    }
+
+    console.log("NavItems seeded successfully!");
   }
 
   // Run the seeding function
-  seedNavItems();
+  seedNavItem();
 
   // Create a user with the hashed password
   const francis = await prisma.user.upsert({
