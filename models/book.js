@@ -23,10 +23,10 @@ export default class Book {
     });
   }
 
-  static async update(bookId, data) {
+  static async update(bookId, updatedBookData) {
     return prisma.book.update({
       where: { id: bookId },
-      data,
+      updatedBookData,
     });
   }
 
